@@ -1,0 +1,265 @@
+.point,
+.spins {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 5px;
+  height: 5px;
+  background: none;
+  border-radius: 100%;
+}
+
+.spinner {
+  width: 800px;
+  height: 750px;
+  margin: auto;
+  position: relative;
+  top: -447px;
+  left: -400px;
+  border-right: solid 1px #24f23f;
+  border-radius: 100% 0 0 0;
+  transform-origin: 100% 100%;
+  background: linear-gradient(51deg, rgba(34, 34, 34, 0) 57%, rgb(65, 177, 55));
+  animation: sweep 10s infinite linear;
+  @keyframes sweep {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+
+.point {
+  box-shadow: -60px 30px 1px #f2ff00;
+}
+
+
+.spins {
+  border: 1px solid #27b645;
+  transition: all 0.3s ease-in-out;
+}
+
+.spin0 {
+  width: 0px;
+  height: 0px;
+}
+.spin1 {
+  width: 175px;
+  height: 175px;
+}
+
+.spin2 {
+  width: 250px;
+  height: 250px;
+}
+.spin3 {
+  width: 350px;
+  height: 350px;
+}
+.spin4 {
+  width: 440px;
+  height: 440px;
+}
+.spin5 {
+  width: 580px;
+  height: 580px;
+}
+.spin6 {
+  width: 680px;
+  height: 680px;
+}
+.spin7 {
+  width: 880px;
+  height: 880px;
+}
+.spin8 {
+  width: 1000px;
+  height: 1000px;
+}
+
+.spin9 {
+  width: 1200px;
+  height: 1200px;
+}
+
+.spin10 {
+  width: 1500px;
+  height: 1500px;
+}
+
+
+.imgSpin {
+  width: 500px;
+  height: 500px;
+  border: 1px solid #eb0f0f;
+}
+
+
+.circleImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  border: 3px solid #014e05;
+  object-fit: cover;
+  position: fixed;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.1);
+  z-index: 1;
+
+  // -webkit-animation: blink normal 2.5s infinite ease-in-out;
+  @keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+  }
+  
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+
+.top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.left {
+  top: 50%;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.right {
+  top: 50%;
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+}
+
+.bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.top-right {
+  top: 20%;
+  left: 85%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.top-left {
+  top: 20%;
+  left: 15%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.bottom-right {
+  top: 85%;
+  right: 15%;
+  transform: translateX(50%) translateY(-50%);
+}
+
+.bottom-left {
+  bottom: 15%;
+  left: 15%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+
+
+
+.svg {
+  //border: 1px solid #eee;
+  border-radius: 50%;
+  margin: -7px;  // this will position the svg
+  width: 50px;
+  height: 50px;
+  display: block;
+  overflow: visible;
+  position: absolute ;
+  
+  &.active {
+    rect {
+      width: 80px;
+      transition: .25s cubic-bezier(0.25, 0.46, 0.45, 0.94);;
+    }
+  }
+}
+
+.circle {
+  transform-origin: 50%;
+  fill: rgb(59, 255, 10);
+}
+
+.circle1 {
+  opacity: 1;
+  animation: expand 2.3s infinite;
+}
+
+.circle3 {
+  opacity: 1;
+  animation: expandCOne 3s infinite;
+}
+
+.circle4 {
+  opacity: 0.8;
+  animation-delay: .5s;
+  animation: expandCTwo 3s infinite;
+  animation-delay: 0.6s;
+  transition: .4s;
+}
+
+
+@keyframes expand {
+  0% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes expandCOne {
+  0% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(3);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
+@keyframes expandCTwo {
+  0% {
+    transform: scale(1);
+  }
+  90% {
+    transform: scale(2.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.7);
+    opacity: 0;
+  }
+}

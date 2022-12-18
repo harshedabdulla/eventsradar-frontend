@@ -1,0 +1,81 @@
+.circularMapR1 {
+  width: 225px;
+  height: 225px;
+  border-radius: 50%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  border: 1px solid #eb0f0f;
+  position: relative;
+}
+
+
+.circleImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  border: 1px solid #642577;
+  object-fit: cover;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  position: absolute;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+
+.top {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.left {
+  top: 50%;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.right {
+  top: 50%;
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+}
+
+.bottom {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.top-right {
+  top: 20%;
+  left: 85%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.top-left {
+  top: 20%;
+  left: 15%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.bottom-right {
+  top: 85%;
+  right: 15%;
+  transform: translateX(50%) translateY(-50%);
+}
+
+.bottom-left {
+  bottom: 15%;
+  left: 15%;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.blink-image {
+  -webkit-animation: blink normal 2.5s infinite ease-in-out;
+}
