@@ -91,8 +91,9 @@ class MapView {
     logo.width = 100;
     logo.height = 100;
     this.mapContext.drawImage(logo, this.pos.x-logo.width/2, this.pos.y-logo.height/2, logo.width, logo.height);
-
   }
+  
+  
   radarScan(angle) {
     const start = angle;
     const end = start + Math.PI / 2;
