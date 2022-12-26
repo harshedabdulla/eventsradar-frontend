@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import NextImage from 'next/image';
 // import { loadImage } from 'canvas';
@@ -7,6 +7,8 @@ import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detec
 
 import Logo from "../../assets/logo.svg"
 import style from "./Radar.module.scss";
+
+
 
 class MapView {
   mouse = { x: 0, y: 0, oldX: 0, oldY: 0, button: false };
@@ -105,7 +107,7 @@ class MapView {
     if (this.mouse.button && this.scale > 0) {
 
 
-      if(isMobile && event.type !== "touchmove") {
+      if (isMobile && event.type !== "touchmove") {
         this.mouse.oldX = this.mouse.x;
         this.mouse.oldY = this.mouse.y;
       }
@@ -113,7 +115,7 @@ class MapView {
       const x = Math.max(this.mouse.x - this.mouse.oldX + this.pos.x, 0) || 0;
       const y = Math.max(this.mouse.y - this.mouse.oldY + this.pos.y, 0) || 0;
 
-      this.pos = {x: Math.min(x, this.map.width), y: Math.min(y, this.map.height)};
+      this.pos = { x: Math.min(x, this.map.width), y: Math.min(y, this.map.height) };
     }
   };
 
@@ -154,7 +156,16 @@ class MapView {
 
 const Radar = (props) => {
 
+  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+
+
   useEffect(() => {
+
+    setAnimateCard([{ y: 100, opacity: 0 }]);
+    setTimeout(() => {
+      setAnimateCard([{ y: 0, opacity: 1 }]);
+    }, 500);
+
 
     const canvas = document.getElementById("canvas");
     function setSize() {
@@ -167,7 +178,7 @@ const Radar = (props) => {
     setSize();
 
     const map = new MapView(canvas);
-    
+
   }, [])
 
 
@@ -175,7 +186,7 @@ const Radar = (props) => {
 
   return (
     <div>
-      <canvas id="canvas" className={style.canvas}></canvas>
+        <canvas id="canvas" className={style.canvas}></canvas>
     </div>
   )
 }
