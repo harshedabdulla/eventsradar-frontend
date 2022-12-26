@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import NextImage from 'next/image';
-import { loadImage } from 'canvas';
+// import { loadImage } from 'canvas';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
 

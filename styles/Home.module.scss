@@ -1,11 +1,13 @@
-.container {
+.RadarContainer {
+  z-index: 0;
   top: 1vh;
   margin: auto;
   border-radius: 25px;
-  max-height: 90vh;
+  max-height: 89vh;
   max-width: 97%;
   overflow: hidden;
   position: relative;
+  transition: all 0.5s ease-in-out;
 
   background: linear-gradient(218deg, #000000, #182e1b, #053601, #0b2407, #0d130a);
   background-size: 800% 800%;
@@ -48,4 +50,14 @@
       color:#137a01
     }
   }
+}
+
+
+.EventsContainer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  margin-top: 9% ;
+  right:0;
+  transition: all 0.5s ease-in-out;
 }

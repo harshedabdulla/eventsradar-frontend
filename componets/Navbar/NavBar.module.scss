@@ -1,0 +1,72 @@
+#navbar {
+  position: fixed;
+  width: 100%;
+  background-color: #ffffff;
+  transition: all 10s ease;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  height: 3.5rem;
+}
+
+.navbar__heading {
+   display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  a {
+    text-decoration: none;
+    color: #063b11;
+  }
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-right: 4rem;
+  margin-left: -2.5rem;   // this will align hr
+  left:0;
+
+  li {
+    // margin: 0 1rem;
+    margin-inline-end: 1rem;
+    
+    cursor: pointer;
+
+    a {
+      text-decoration: none;
+      color: #063b11;
+    }
+  }
+}
+
+.socialIcon {
+  display: flex;
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+}
+
+.hr {
+  //  width: 1rem;
+  //  height: 1px;
+  //  background-color: #063b11;
+  //  border: none;
+  //  margin: 0 2.5rem;
+  // display: flex;
+  // align-items: center;
+  // justify-content: center;
+  border: 1px solid rgb(6, 75, 17);
+  width: 45rem;
+  // margin-left: 5rem;
+}

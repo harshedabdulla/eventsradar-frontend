@@ -1,0 +1,81 @@
+#event__page {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: rgb(238, 237, 237);
+  display: flex;
+  flex-direction: column;
+
+  /* background: linear-gradient(218deg, #000000, #39b54a, #000000, #1d902d, #000000);
+  background-size: 800% 800%;
+  animation: bg-animation 20s ease-in-out infinite; */
+}
+/* @keyframes bg-animation {
+  0%{background-position:0% 48%}
+  50%{background-position:100% 53%}
+  100%{background-position:0% 48%}
+} */
+
+.event__header{
+  width: 100%;
+  height: 12%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1%;
+  margin-bottom: -3%;
+}
+
+.event__header > h1 {
+  margin: 2vmax;
+  margin-left: 5%;
+  align-items: left;
+  color: rgb(0, 0, 0);
+}
+.event__header > button {
+  margin: 2vmax;
+  margin-right: 5%;
+  width: 100px;
+  height: 40px;
+  background-color: #37AE47;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  align-items: right;
+  transition: all 0.3s ease-in-out;
+}
+.event__header > button:hover {
+  background-color: #9ddaa5;
+}
+
+.event__menu {
+  margin-left: 5%;
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.event__menu > p {
+  padding-right: 1vmax;
+  cursor: pointer;
+  transition: color .3s ease-in-out;
+}
+.event__menu > p:hover {
+  color: #37AE47;
+}
+
+.active_menu {
+  color : #37AE47
+}
+
+.event__card {
+  margin-left: 6%;
+  margin-right: 6%;
+  display: flex; 
+  flex-direction: row; 
+  justify-content: space-between; 
+  float: left; 
+  flex-wrap: wrap;
+}
