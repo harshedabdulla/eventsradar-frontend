@@ -24,28 +24,30 @@
   justify-content: space-between;
   margin-top: 1%;
   margin-bottom: -3%;
-}
 
-.event__header > h1 {
-  margin: 2vmax;
-  margin-left: 5%;
-  align-items: left;
-  color: rgb(0, 0, 0);
-}
-.event__header > button {
-  margin: 2vmax;
-  margin-right: 5%;
-  width: 100px;
-  height: 40px;
-  background-color: #37AE47;
-  cursor: pointer;
-  border: none;
-  border-radius: 8px;
-  align-items: right;
-  transition: all 0.3s ease-in-out;
-}
-.event__header > button:hover {
-  background-color: #9ddaa5;
+  h1 {
+    margin: 2vmax;
+    margin-left: 5%;
+    align-items: left;
+    color: rgb(0, 0, 0);
+  }
+
+  button {
+    margin: 2vmax;
+    margin-right: 5%;
+    width: 100px;
+    height: 40px;
+    background-color: #37AE47;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    align-items: right;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #9ddaa5;
+    }
+  }
 }
 
 .event__menu {
@@ -56,26 +58,35 @@
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+
+  p {
+    padding-right: 1vmax;
+    cursor: pointer;
+    transition: color .3s ease-in-out;
+
+    &:hover {
+      color: #37AE47;
+    }
+  }
 }
-.event__menu > p {
-  padding-right: 1vmax;
-  cursor: pointer;
-  transition: color .3s ease-in-out;
-}
-.event__menu > p:hover {
-  color: #37AE47;
-}
+
 
 .active_menu {
   color : #37AE47
 }
 
-.event__card {
-  margin-left: 6%;
-  margin-right: 6%;
-  display: flex; 
-  flex-direction: row; 
-  justify-content: space-between; 
-  float: left; 
+
+.event__card { 
+  display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  // margin: 0 2%;
+  @media screen and  (min-width : 1000px ) and (max-width : 1024px) {
+    margin:0 0%;
+  }
+  @media screen and (min-width : 1024px) and (max-width : 1440px) {
+    margin:0 10%;
+  }
+
 }

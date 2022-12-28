@@ -1,13 +1,3 @@
-// @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-// * {
-//   box-sizing: border-box;
-// }
-
-.container {
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-}
 .card {
   border: 3px solid #37AE47;
   margin: 10px;
@@ -16,6 +6,8 @@
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
+
+
 }
 .card_header img {
   /* border-radius: 10px; */
@@ -23,6 +15,11 @@
   height: 150px;
   -o-object-fit: cover;
   object-fit: cover;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+
 }
 .card_body {
   background-color: black;
@@ -33,53 +30,57 @@
   margin-top: -10px;
   padding: 10px;
   height: 150px;
+  p {
+    font-size: small;
+    color: white;
+  }
+
+  span {
+    font-size: small;
+    color: #09F228;
+  }
+
+  button {
+    background-color: black;
+    border: 2px solid #37AE47;
+    border-radius: 12px;
+    width: 250px;
+    height: 50px;
+    display: flex;
+    margin-top: 10px;
+    margin-left: 15px;
+    justify-content: center;
+    cursor: none;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background-color: #37AE47;
+      cursor: pointer;
+    }
+
+    p {
+      font-size: 15px;
+      margin-top: 10px;
+    }
+  }
 }
 
-.card_body p {
-  font-size: small;
-  color: white;
-}
-
-.card_body span {
-  font-size: small;
-  color: #09F228;
-}
-
-.card_body button {
-  background-color: black;
-  border: 2px solid #37AE47;
-  border-radius: 12px;
-  width: 250px;
-  height: 50px;
-  display: flex;
-  margin-top: 10px;
-  margin-left: 15px;
-  justify-content: center;
-  cursor: none;
-  transition: all 0.3s ease-in-out;
-}
-.card_body button:hover {
-  background-color: #37AE47;
-  cursor: pointer;
-}
-
-.card_body button p {
-  font-size: 15px;
-  margin-top: 10px;
-}
 
 .club__icon {
   display: flex;
   margin-top: auto;
   margin-left: 10px;
+
+  img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }  
 }
-.club__icon img {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  margin-top: 10px;
-}
+
 .club__name h2 {
   margin: 0;
 }

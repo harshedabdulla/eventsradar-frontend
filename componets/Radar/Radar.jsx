@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import NextImage from 'next/image';
-// import { loadImage } from 'canvas';
 import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 
-
-import Logo from "../../assets/logo.svg"
 import style from "./Radar.module.scss";
+
+
+const eventRadarLogo = "http://localhost:3000/assets/logo.svg";
+const tedLogo = "http://localhost:3000/assets/tedLogo.svg";
 
 
 
@@ -21,8 +22,6 @@ class MapView {
     this.map = map;
     this.mapContext = map.getContext("2d");
     this.pos = { x: this.map.width / 2, y: this.map.height / 2 };
-    // set background color black
-
 
     this.map.addEventListener("mousemove", this.mouseEvent, { passive: true });
     this.map.addEventListener("mousedown", this.mouseEvent, { passive: true });
@@ -58,7 +57,7 @@ class MapView {
   drawCanvas = (frame) => {
     this.mapContext.clearRect(0, 0, this.map.width, this.map.height);
     this.mapContext.fillStyle = "rgba(7,59,13,1)";
-    this.mapContext.fillRect(0, 0, this.map.width, this.map.height);
+    // this.mapContext.fillRect(0, 0, this.map.width, this.map.height); // bg color
     this.radarScan(frame / 2000);
 
     const step = canvas.width / this.maxCircles / 2;
@@ -66,17 +65,53 @@ class MapView {
       .map((v, i) => (step * (i + this.scale)) % (canvas.width * 4))
 
     radius.forEach(this.drawCircle);
-    // this.set_logo()
+    this.set_logo()
     requestAnimationFrame(this.drawCanvas);
   };
 
   set_logo() {
-    // const logo = new Image();
-    // logo.src = Logo;
-    // logo.width = 100;
-    // logo.height = 100;
-    // this.mapContext.drawImage(logo, this.pos.x-logo.width/2, this.pos.y-logo.height/2, logo.width, logo.height);
+    const logo = new Image();
+    logo.src = eventRadarLogo;
+    logo.width = 150;
+    logo.height = 150;
+    this.mapContext.drawImage(logo, this.pos.x - logo.width / 2, this.pos.y - logo.height / 2, logo.width, logo.height);
   }
+
+  radarScan(angle) {
+    const start = angle;
+    const end = start + Math.PI / 2;
+
+    const r = this.map.width / 2;
+    const x1 = this.pos.x;
+    const y1 = this.pos.y;
+    const x2 = this.pos.x + r * Math.cos(start);
+    const y2 = this.pos.y + r * Math.sin(start);
+
+    const gradient = this.mapContext.createLinearGradient(x1, y1, x2, y2);
+
+    gradient.addColorStop(0, "rgba(55,174,71,1)");
+    gradient.addColorStop(0.01, "rgba(55,174,71,0.4)");
+    gradient.addColorStop(1, "rgba(55,174,71,0)");
+
+    this.mapContext.fillStyle = gradient;
+    this.mapContext.lineWidth = 0;
+
+    this.mapContext.beginPath();
+    this.mapContext.moveTo(this.pos.x, this.pos.y);
+    this.mapContext.arc(this.pos.x, this.pos.y, r * 4, start, end);
+    this.mapContext.closePath();
+    this.mapContext.fill();
+  }
+
+  drawCircle = (radius) => {
+    // draw circle with green stroke
+    this.mapContext.strokeStyle = "#37AE47";
+    this.mapContext.beginPath();
+    this.mapContext.arc(this.pos.x, this.pos.y, radius, 0, 2 * Math.PI);
+    this.mapContext.stroke();
+    // draw 
+  }
+
 
   mouseWheelEvent = (event) => {
     const x = event.offsetX;
@@ -119,45 +154,11 @@ class MapView {
     }
   };
 
-  radarScan(angle) {
-    const start = angle;
-    const end = start + Math.PI / 2;
-
-    const r = this.map.width / 2;
-    const x1 = this.pos.x;
-    const y1 = this.pos.y;
-    const x2 = this.pos.x + r * Math.cos(start);
-    const y2 = this.pos.y + r * Math.sin(start);
-
-    const gradient = this.mapContext.createLinearGradient(x1, y1, x2, y2);
-
-    gradient.addColorStop(0, "rgba(55,174,71,1)");
-    gradient.addColorStop(0.01, "rgba(55,174,71,0.4)");
-    gradient.addColorStop(1, "rgba(55,174,71,0)");
-
-    this.mapContext.fillStyle = gradient;
-    this.mapContext.lineWidth = 0;
-
-    this.mapContext.beginPath();
-    this.mapContext.moveTo(this.pos.x, this.pos.y);
-    this.mapContext.arc(this.pos.x, this.pos.y, r * 4, start, end);
-    this.mapContext.closePath();
-    this.mapContext.fill();
-  }
-
-  drawCircle = (radius) => {
-    // draw circle with green stroke
-    this.mapContext.strokeStyle = "#37AE47";
-    this.mapContext.beginPath();
-    this.mapContext.arc(this.pos.x, this.pos.y, radius, 0, 2 * Math.PI);
-    this.mapContext.stroke();
-  }
-}
+};
 
 const Radar = (props) => {
 
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-
 
   useEffect(() => {
 
@@ -186,7 +187,7 @@ const Radar = (props) => {
 
   return (
     <div>
-        <canvas id="canvas" className={style.canvas}></canvas>
+      <canvas id="canvas" className={style.canvas}></canvas>
     </div>
   )
 }

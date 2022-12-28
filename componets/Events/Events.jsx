@@ -47,6 +47,8 @@ const Events = () => {
           ))}
         </div>
 
+
+
         <motion.div
           animate={animateCard}
           transition={{ duration: 0.5, delayChildren: 0.5 }}
@@ -62,8 +64,9 @@ const Events = () => {
           <EventCard />
           <EventCard />
           <EventCard />
+          <EventCard />
         </motion.div>
-
+         
       </div>
     </div>
   )

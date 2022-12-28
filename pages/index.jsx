@@ -35,13 +35,7 @@ const Home = () => {
     setZoomOut(true)
   }
 
-
-
   useEffect(() => {
-
-
-   
-
     const radar = document.querySelector('#radar');
     const navbarContainer = document.querySelector('#navbarContainer');
     const events = document.querySelector('#events');
@@ -81,41 +75,39 @@ const Home = () => {
           </div>
         </div>
       </motion.div>
-      <style jsx>
-        {`
-        #radar {
-          transition: all 0.5s ease;
-          visibility: hidden;
-        }
-      .hide {
-        max-height: 0;
-      }
-        `}
-      </style>
-
 
       <div id="navbarContainer" >
-        <NavBar mainoffsetHeight={mainoffsetHeight} />
+        <NavBar  />
       </div>
-      <style jsx>
-        {`
-        #navbarContainer {
-          visibility: hidden;
-        }
-      `}
-      </style>
-
-
+    
       <div id="events" className={style.EventsContainer}>
         <Events />
       </div>
+
       <style jsx>
-        {`
-        #events {
-          visibility: hidden;
-        }
-      `}
-      </style>
+            {`
+               #radar {
+                transition: all 0.5s ease;
+                visibility: hidden;
+              }
+              
+            .hide {
+              max-height: 0;
+            }
+      
+            #navbarContainer {
+              visibility: hidden;
+            }
+              #events {
+                visibility: hidden;
+              }
+              @media (max-width: 700px) {
+                #events {
+                  display: none !important;
+                }
+              }
+            `}
+          </style>
     </>
   )
 }

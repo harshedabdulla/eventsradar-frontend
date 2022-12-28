@@ -16,8 +16,8 @@ const scaleVariants = {
 const EventCard = () => {
   return (
     <motion.div variants={scaleVariants}
-    whileInView={scaleVariants.whileInView} >
-    <div className={style.container}>
+    whileInView={scaleVariants.whileInView}
+     >
     <div className={style.card}>
       <div className={style.card_header}>
         <div className={style.club__icon}>
@@ -37,7 +37,6 @@ const EventCard = () => {
       <div>
       </div>
     </div>
-  </div>
   </motion.div>
   )
 }
