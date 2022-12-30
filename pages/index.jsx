@@ -36,9 +36,12 @@ const Home = () => {
   }
 
   useEffect(() => {
+
+
     const radar = document.querySelector('#radar');
     const navbarContainer = document.querySelector('#navbarContainer');
     const events = document.querySelector('#events');
+
     const setTimeoutId = setTimeout(() => {
       radar.style.visibility = 'visible';
       events.style.visibility = 'visible';
@@ -47,10 +50,10 @@ const Home = () => {
 
     const handleScroll = () => {
       if (window.pageYOffset > 40) {
-        radar.classList.add('hide');
+        radar.classList.add(style.hide);
       }
       else if (window.pageYOffset === 0) {
-        radar.classList.remove('hide');
+        radar.classList.remove(style.hide);
       }
     }
 
@@ -86,26 +89,19 @@ const Home = () => {
 
       <style jsx>
             {`
-               #radar {
+              #radar {
                 transition: all 0.5s ease;
                 visibility: hidden;
               }
-              
-            .hide {
-              max-height: 0;
-            }
-      
-            #navbarContainer {
-              visibility: hidden;
-            }
+        
+              #navbarContainer {
+                visibility: hidden;
+              }
+
               #events {
                 visibility: hidden;
               }
-              @media (max-width: 700px) {
-                #events {
-                  display: none !important;
-                }
-              }
+              
             `}
           </style>
     </>

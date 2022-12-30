@@ -7,7 +7,7 @@ import style from "./Radar.module.scss";
 
 
 const eventRadarLogo = "http://localhost:3000/assets/logo.svg";
-const tedLogo = "http://localhost:3000/assets/tedLogo.svg";
+const tedLogo = "http://localhost:3000/assets/tedLogo.png";
 
 
 
@@ -61,11 +61,10 @@ class MapView {
     this.radarScan(frame / 2000);
 
     const step = canvas.width / this.maxCircles / 2;
-    const radius = Array(this.maxCircles * 8).fill(1)
-      .map((v, i) => (step * (i + this.scale)) % (canvas.width * 4))
-
+    const radius = Array(this.maxCircles * 8).fill(1).map((v, i) => (step * (i + this.scale)) % (canvas.width * 4))
     radius.forEach(this.drawCircle);
-    this.set_logo()
+    // this.set_logo()
+
     requestAnimationFrame(this.drawCanvas);
   };
 
@@ -77,41 +76,41 @@ class MapView {
     this.mapContext.drawImage(logo, this.pos.x - logo.width / 2, this.pos.y - logo.height / 2, logo.width, logo.height);
   }
 
+  set_events_logo(x, y, radius) {
+    const logo = new Image();
+    logo.src = tedLogo;
+    logo.width = 50;
+    logo.height = 50;
+    this.mapContext.drawImage(logo, x - radius, y - radius, logo.width, logo.height);
+  }
+
+  drawCircle = (radius) => {
+    this.mapContext.strokeStyle = "#37AE47";
+    this.mapContext.beginPath();
+    this.mapContext.arc(this.pos.x, this.pos.y, radius, 0, 2 * Math.PI);
+    this.mapContext.stroke();
+  }
+
   radarScan(angle) {
     const start = angle;
     const end = start + Math.PI / 2;
-
     const r = this.map.width / 2;
     const x1 = this.pos.x;
     const y1 = this.pos.y;
     const x2 = this.pos.x + r * Math.cos(start);
     const y2 = this.pos.y + r * Math.sin(start);
-
     const gradient = this.mapContext.createLinearGradient(x1, y1, x2, y2);
-
     gradient.addColorStop(0, "rgba(55,174,71,1)");
     gradient.addColorStop(0.01, "rgba(55,174,71,0.4)");
     gradient.addColorStop(1, "rgba(55,174,71,0)");
-
     this.mapContext.fillStyle = gradient;
     this.mapContext.lineWidth = 0;
-
     this.mapContext.beginPath();
     this.mapContext.moveTo(this.pos.x, this.pos.y);
     this.mapContext.arc(this.pos.x, this.pos.y, r * 4, start, end);
     this.mapContext.closePath();
     this.mapContext.fill();
   }
-
-  drawCircle = (radius) => {
-    // draw circle with green stroke
-    this.mapContext.strokeStyle = "#37AE47";
-    this.mapContext.beginPath();
-    this.mapContext.arc(this.pos.x, this.pos.y, radius, 0, 2 * Math.PI);
-    this.mapContext.stroke();
-    // draw 
-  }
-
 
   mouseWheelEvent = (event) => {
     const x = event.offsetX;
@@ -138,22 +137,16 @@ class MapView {
     this.mouse.x = event.offsetX ?? event.touches[0]?.clientX;
     this.mouse.y = event.offsetY ?? event.touches[0]?.clientY;
 
-
     if (this.mouse.button && this.scale > 0) {
-
-
       if (isMobile && event.type !== "touchmove") {
         this.mouse.oldX = this.mouse.x;
         this.mouse.oldY = this.mouse.y;
       }
-
       const x = Math.max(this.mouse.x - this.mouse.oldX + this.pos.x, 0) || 0;
       const y = Math.max(this.mouse.y - this.mouse.oldY + this.pos.y, 0) || 0;
-
       this.pos = { x: Math.min(x, this.map.width), y: Math.min(y, this.map.height) };
     }
   };
-
 };
 
 const Radar = (props) => {
