@@ -1,12 +1,23 @@
 .card {
   border: 3px solid #37AE47;
-  margin: 10px;
+  margin: 15px;
   background-color: #37AE47;
   border-radius: 30px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   width: 300px;
 
+  @media screen and (max-width : 330px) {
+    width: 250px;
+    margin: 20px
+  }
+
+  @media screen and (max-width : 1055px) and (min-width : 801px) {
+    position: relative !important;
+    margin-bottom: 50px;
+    margin-left: 20px;
+    margin-right: 50px;
+  }
 
 }
 .card_header img {
@@ -53,6 +64,12 @@
     cursor: none;
     transition: all 0.3s ease-in-out;
 
+    @media screen and (max-width : 330px) {
+      width: 200px;
+      height: 45px;
+    }
+  
+    
     &:hover {
       background-color: #37AE47;
       cursor: pointer;

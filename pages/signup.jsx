@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState} from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,6 +12,33 @@ import linkedin from "../public/assets/linkedin3.png";
 
 
 const signup = () => {
+
+
+  const [userData, setUserData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUserData({ ...userData, [id]: value})
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userData);
+    setUserData({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: ''
+    });
+  }
+
+
+
   return (
     <div className={style.container}>
 
@@ -41,27 +68,24 @@ const signup = () => {
         </div>
 
 
-        <form>
-          <label for="username">First name</label>
-          <input id="username" type="text" />
+        <form  onSubmit={handleSubmit}>
+          <label htmlFor="firstName">First name</label>
+          <input id="firstName" type="text" value={userData.firstName} onChange={handleChange} required/>
 
-          <label for="username">Last name</label>
-          <input id="username" type="text" />
+          <label htmlFor="lastName">Last name</label>
+          <input id="lastName" type="text" value={userData.lastName} onChange={handleChange} required/>
 
-          <label for="email">Email</label>
-          <input id="email" type="email" />
+          <label htmlFor="email">Email</label>
+          <input id="email" type="email" value={userData.email} onChange={handleChange} required/>
 
-          <label for="password">Password</label>
-          <input id="password" type="password" />
-
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" value={userData.password} onChange={handleChange} minLength={5} required/>
           <div >
             <input id="checkbox" type="checkbox" required />
-            <label for="checkbox">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+            <label htmlFor="checkbox">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
           </div>
-
-          <button className={style.submitBtn} type="submit">Sing Up</button>
+          <button className={style.submitBtn} type="submit" >Sing Up</button>
         </form>
-
       </div>
     </div>
   )

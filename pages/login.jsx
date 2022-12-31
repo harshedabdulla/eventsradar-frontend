@@ -11,7 +11,36 @@ import linkedin from "../public/assets/linkedin3.png";
 
 
 
+
 const login = () => {
+
+  // create state from the form
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  // create a function to onChange={handleChange}   
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    if (id === 'email') {
+      setEmail(value);
+    }
+    else if (id === 'password') {
+      setPassword(value);
+    }
+  }
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('email', email);
+    console.log('password', password);
+    setEmail('');
+    setPassword('');
+  }
+
+
+
+
   return (
     <div className={style.container}>
 
@@ -38,12 +67,12 @@ const login = () => {
           <hr />
         </div>
 
-        <form>
-          <label for="email">Email</label>
-          <input id="email" type="email" />
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email" >Email</label>
+          <input id="email" type="email" value={email} onChange={handleChange} required/>
 
-          <label for="password">Password</label>
-          <input id="password" type="password" />
+          <label htmlFor="password" >Password</label>
+          <input id="password" type="password" value={password} onChange={handleChange} required/>
 
 
           <button className={`${style.submitBtn} ${style.loginSubmitBtn}`} type="submit">Login</button>

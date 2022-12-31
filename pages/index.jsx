@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+
 import Radar from "../componets/Radar/Radar";
 import NavBar from "../componets/Navbar/NavBar";
+import EventContext from '../context/events/EventContext';
 
 import style from "../styles/Home.module.scss";
 import Events from '../componets/Events/Events';
-
-
 
 
 const scaleVariants = {
@@ -20,8 +21,38 @@ const scaleVariants = {
   }
 }
 
+export async function getServerSideProps(context) {
+  try {
+    const HOST = "https://api.events.cusat.me"
+    const url = `${HOST}/user/AllEvents`
+    const { data } = await axios.get(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        }
+        })
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    return {
+      props: {
+        error: error.message,
+      },
+    };
+  }
+}
 
-const Home = () => {
+
+
+
+
+
+const Home = (props) => {
+
+  console.log(props)
+
 
   const [zoomin, setZoomIn] = useState(false)
   const [zoomout, setZoomOut] = useState(false)
@@ -36,7 +67,6 @@ const Home = () => {
   }
 
   useEffect(() => {
-
 
     const radar = document.querySelector('#radar');
     const navbarContainer = document.querySelector('#navbarContainer');
@@ -80,7 +110,7 @@ const Home = () => {
       </motion.div>
 
       <div id="navbarContainer" >
-        <NavBar  />
+        <NavBar />
       </div>
     
       <div id="events" className={style.EventsContainer}>
@@ -107,5 +137,6 @@ const Home = () => {
     </>
   )
 }
+
 
 export default Home;

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "13.0.7",
+    "axios": "^1.2.2",
     "bootstrap": "^5.2.3",
     "canvas": "^2.10.2",
     "eslint": "8.30.0",
