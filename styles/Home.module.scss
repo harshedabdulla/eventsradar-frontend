@@ -1,32 +1,36 @@
-.container {
-  top: 1vh;
+.RadarContainer {
+  top: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
   margin: auto;
   border-radius: 25px;
-  max-height: 90vh;
+  max-height: 89vh;
   max-width: 97%;
   overflow: hidden;
   position: relative;
+  transition: all 0.5s ease-in-out;
 
-  background: linear-gradient(218deg, #000000, #182e1b, #000000, #0b2407, #0d130a);
+  background: linear-gradient(218deg, #030f03, #182e1b, #062703, #0c4204, #1d5203);
   background-size: 800% 800%;
-  animation: bg-animation 50s ease-in-out infinite; 
+  animation: bg-animation 30s ease-in-out infinite; 
 
   @keyframes bg-animation {
     0%{background-position:0% 48%}
     50%{background-position:100% 53%}
     100%{background-position:0% 48%}
   }
+
+
+  @media screen and (max-width: 700px) {
+    top: 0;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
 }
 
-// .container:before,
-// .container:after {  
-    // display: block;    
-    // height: 0;    
-    // overflow: hidden; 
-// }
-// .container:after { clear: both; }
-// .container { zoom: 1; }
-// 
+
 
 .radar_btn {
   position: absolute;
@@ -44,6 +48,26 @@
     &:hover{
       background-color: #0b3a03;
       transform: scale(1.13);
+
+      color:#137a01
     }
+  }
+}
+
+      
+.hide {
+  max-height: 0;
+}
+
+.EventsContainer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  margin-top: 9% ;
+  right:0;
+  transition: all 0.5s ease-in-out;
+
+  @media (max-width: 700px) {
+      display: none !important;
   }
 }

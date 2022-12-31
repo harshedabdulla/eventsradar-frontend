@@ -1,0 +1,245 @@
+.container {
+  background-color: black;
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  // overflow: hidden;
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+}
+
+.imageContainer {
+  width: 100%;
+
+  .logo {
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
+  }
+
+  p {
+    margin: 3rem 8rem;
+    color: #ffffff;
+
+    a {
+      color: #37AE47;
+      text-decoration: none;
+      &:hover {
+        color: #2c8a3e;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      margin: 3rem 5rem;
+    }
+    @media screen and (max-width: 375px) {
+      margin: 3rem 2rem;
+    }
+
+  }
+
+  .socialIcons {
+    width: 15em;
+    margin: 3rem 7rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: all 0.1s ease-in-out;
+
+    span {
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      margin: 1rem 4rem;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 740px) {
+    align-items: center;
+  }
+
+}
+
+
+.signup_form {
+  width: 50%;
+  display: flex;
+  margin-right: 7rem;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
+
+  @media screen and (max-width: 1000px) {
+    margin-right: 2rem;
+  }
+
+
+  @media screen and (max-width: 825px) {
+    margin-top: 2rem;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+
+  .GoogleBtn {
+    width: 22rem;
+    height: 2rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: initial;
+    border: none !important;
+    border-radius: 5px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    // padding: 0rem 7rem;   // adjust this to change the height width of the button
+    cursor: pointer;
+
+    p {
+      margin: 0 1rem;
+    }
+
+    @media screen and (max-width: 450px) {
+      width: 18rem;
+    }
+
+  }
+
+  .hr {
+    width: 22rem;
+    height: 1px;
+    display: flex;
+    float: left;
+
+    hr {
+      border: 1px solid #353333;
+      flex: auto
+    }
+
+    span {
+      margin: 0 1rem;
+      color: #ffffff;
+    }
+
+    @media screen and (max-width: 800px) {
+      margin: 1.5rem 0;
+    }
+    @media screen and (max-width: 450px) {
+      width: 18rem;
+    }
+  }
+
+  form {
+    margin-top: 1rem;
+
+    label {
+      font-size: 0.8rem;
+      font-weight: bold;
+      display: block;
+      color: white;
+    }
+
+    div {
+      display: flex;
+
+      label {
+        margin-top: 0.2rem;
+        width: 100%;
+
+        a {
+          color: #37AE47;
+          text-decoration: none;
+          &:hover {
+            color: #2c8a3e;
+          }
+        }
+      }
+    }
+
+
+    input {
+      display: block;
+      width: 20rem;
+      height: 0;
+      border: 2px solid #37AE47 !important;
+      background-color: black;
+      color: white !important;
+
+      &[type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.5rem;
+
+        &:checked+label::before {
+          background-color: #37AE47;
+        }
+      }
+
+
+      &:not([type="submit"]) {
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1.5rem;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+      }
+
+      @media screen and (max-width: 450px) {
+        width: 15rem       
+      }
+    }
+
+    .submitBtn {
+      text-align: center;
+      border: none !important;
+      border-radius: 5px;
+      background-color: #37AE47;
+      color: white;
+      font-weight: bold;
+      padding: 0.7rem 9.4rem; // adjust this to change the height width of the button
+      cursor: pointer;
+
+      &:hover {
+        background-color: #2c8a3e;
+      }
+
+      @media screen and (max-width: 450px) {
+        margin-top: 1rem;
+        padding: 0.7rem 7rem;
+      }
+    }
+  }
+}
+
+
+.login {
+  justify-content: center;
+}
+.loginHr {
+  margin: 2rem 0;
+}
+.loginSubmitBtn {
+  padding: 0.7rem 9.9rem !important;
+  @media screen and (max-width: 450px) {
+    margin-top: 1rem !important;
+    padding: 0.7rem 7.5rem !important;
+  }
+}
