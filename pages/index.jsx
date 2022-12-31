@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 import Radar from "../componets/Radar/Radar";
 import NavBar from "../componets/Navbar/NavBar";
@@ -21,7 +23,7 @@ const scaleVariants = {
   }
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   try {
     const HOST = "https://api.events.cusat.me"
     const url = `${HOST}/user/AllEvents`
@@ -45,13 +47,14 @@ export async function getServerSideProps(context) {
 }
 
 
-
-
-
-
 const Home = (props) => {
 
-  console.log(props)
+  const router = useRouter();
+
+  // console.log(props.data.data.Events)
+
+  const eventContext = useContext(EventContext);
+  const {getEvents } = eventContext;
 
 
   const [zoomin, setZoomIn] = useState(false)
@@ -67,6 +70,15 @@ const Home = (props) => {
   }
 
   useEffect(() => {
+
+      
+    const token = localStorage.getItem('token');
+    // console.log(token);
+    if (!token) {
+      router.push('/login');
+    }
+
+    getEvents(props.data.data.Events);
 
     const radar = document.querySelector('#radar');
     const navbarContainer = document.querySelector('#navbarContainer');
@@ -98,6 +110,7 @@ const Home = (props) => {
 
   return (
     <>
+    <Toaster />
       <motion.div variants={scaleVariants}
         whileInView={scaleVariants.whileInView} >
         <div id="radar" className={style.RadarContainer}>
@@ -116,6 +129,7 @@ const Home = (props) => {
       <div id="events" className={style.EventsContainer}>
         <Events />
       </div>
+
 
       <style jsx>
             {`

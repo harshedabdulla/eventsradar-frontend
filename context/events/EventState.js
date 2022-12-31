@@ -11,10 +11,8 @@ const EventState = (props) => {
   const [events, setEvents] = useState([])
 
 
-
-  const getEvents = async () => {
-    
-  
+  const getEvents = async (eventsArr) => {
+    setEvents(eventsArr)
   }
 
   
@@ -23,7 +21,7 @@ const EventState = (props) => {
 
 
   return (
-    <eventContext.Provider value={{getEvents}}>
+    <eventContext.Provider value={{getEvents, events}}>
       {props.children}
     </eventContext.Provider>
   )
