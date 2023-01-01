@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import style from "./EventCard.module.scss"
 import Dp from "../../public/assets/dp.png";
@@ -29,13 +29,20 @@ const EventCard = (props) => {
       <div className={style.card}>
         <div className={style.card_header}>
           <div className={style.club__icon}>
-            <Image src={Dp} className={style.club__iconImg}
-              alt="icon" />
+            <Image
+              src={Dp}
+              className={style.club__iconImg}
+              alt="icon"
+            />
             <div className={style.club__name}>
               <h3>{title}</h3>
             </div>
           </div>
-          <Image src={eventImg ? eventImg : placeholder} className={style.header_img} alt="rover" />
+          {eventImg ?
+            <img src={eventImg} className={style.header_img} alt="rover" />
+            :
+            <Image src={placeholder} className={style.header_img} alt="rover" />
+          }
         </div>
         <div className={style.card_body}>
           <p>{description}</p>
