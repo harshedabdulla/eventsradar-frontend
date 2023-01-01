@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 import { TailSpin } from 'react-loader-spinner'
-import axios from 'axios';
-
-
+import { LoginReqeust } from '../api/login';
 
 import style from "../styles/Login.module.scss"
 import logo from "../public/assets/loginlogo.svg";
@@ -22,7 +19,6 @@ const login = () => {
 
   const { toasts } = useToasterStore();
   const router = useRouter();
-
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -40,7 +36,7 @@ const login = () => {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
@@ -49,7 +45,7 @@ const login = () => {
     }
 
     setIsLoading(true);
-    axios.post('https://api.events.cusat.me/user/login', JSON.stringify(data))
+    LoginReqeust(data)
       .then(res => {
         console.log(res.data.data);
         localStorage.setItem('token', res.data.data);
@@ -57,15 +53,16 @@ const login = () => {
         setIsLoading(false);
         toast.success('Login Successful');
         router.push("/");
-      }
-      )
+      })
       .catch(err => {
         if (err.response) {
+          setEmail('');
+          setPassword('');
           setIsLoading(false);
           toast.error(err.response.data.message)
         }
-      }
-      )
+      })
+
   }
 
 
@@ -77,15 +74,10 @@ const login = () => {
   }, [toasts]);
 
 
-
-
   return (
     <>
-
       <div className={style.container} id="canvas">
         <Toaster />
-
-
 
         <div className={style.imageContainer}>
           <Image src={logo} alt="logo" width="300" className={style.logo} />
@@ -120,24 +112,22 @@ const login = () => {
 
             <button className={`${style.submitBtn} ${style.loginSubmitBtn}`} type="submit">
               {isLoading ?
-                  <TailSpin
-                    height="15"
-                    width="36"
-                    color="white"
-                    ariaLabel="tail-spin-loading"
-                    radius="1"
-                    wrapperStyle={{}}
-                    wrapperClass=""
-                    visible={true}
-                  />: `Login`}
+                <TailSpin
+                  height="15"
+                  width="36"
+                  color="white"
+                  ariaLabel="tail-spin-loading"
+                  radius="1"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                /> : `Login`}
             </button>
           </form>
 
         </div>
       </div>
     </>
-
-
   )
 }
 

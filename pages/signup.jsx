@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
 import { TailSpin } from 'react-loader-spinner'
-import axios from 'axios';
+import { SignupReqeust } from '../api/signup';
 
 import style from "../styles/Login.module.scss"
 import logo from "../public/assets/loginlogo.svg";
@@ -46,7 +46,8 @@ const signup = () => {
       password: userData.password
     }
     setIsLoading(true);
-    axios.post('https://api.events.cusat.me/user/signup', JSON.stringify(data))
+
+    SignupReqeust(data)
       .then(res => {
         // console.log(res.data.data);
         toast.success('Signup Successful');
@@ -58,10 +59,10 @@ const signup = () => {
       )
       .catch(err => {
         if (err.response) {
+          setUserData({firstName: '', lastName: '', email: '', password: '' });
           setIsLoading(false);
-          // console.log(err.response.data);
-          if (err.response.data.message === "User already exists")
-            toast.error("User already exists")
+          if (err.response.data.errors[0] === "Username already exists")
+            toast.error("User with this email already exists")
           else
             toast.error(err.response.data.message)
         }

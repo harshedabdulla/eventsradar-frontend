@@ -6,8 +6,6 @@ import style from "./Events.module.scss";
 
 const Events = ({Events}) => {
 
-  console.log(Events)
-
   const [activeMenu, setActiveMenu] = useState("All")
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
