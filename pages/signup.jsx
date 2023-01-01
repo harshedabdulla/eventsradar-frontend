@@ -56,7 +56,9 @@ const signup = () => {
         localStorage.setItem('user', JSON.stringify(data.email));
         setIsLoading(false);
         router.push("/");
-        setIsLoadingScreen(true);
+        setTimeout(function() {
+          setIsLoadingScreen(true);
+        }, 200);
       }
       )
       .catch(err => {
@@ -85,7 +87,7 @@ const signup = () => {
     <>
 
       {isLoadingScreen ?
-        <div id="canvas">
+        <div id="canvas" className={style.loaderContainer}>
           <Toaster />
           <ThreeDots
             height="80"

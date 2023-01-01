@@ -13,19 +13,26 @@
   }
 }
 
-.loadingScreen {
-  position: fixed;
-  top: 40%;
-  right: 48%;
-  z-index: 100;
-  @media screen and (max-width: 500px) {
-    right: 40% !important;
-    left: 43% !important;
-  }
-  @media screen and (max-width: 910px) {
-    right: 45% !important;
+.loaderContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: black !important;
+
+  .loadingScreen {
+    position: fixed;
+    top: 40%;
+    right: 48%;
+    z-index: 100;
+    @media screen and (max-width: 500px) {
+      right: 40% !important;
+      left: 43% !important;
+    }
+    @media screen and (max-width: 910px) {
+      right: 45% !important;
+    }
   }
 }
+
 
 
 .imageContainer {

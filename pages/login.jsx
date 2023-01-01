@@ -54,7 +54,10 @@ const login = () => {
         setIsLoading(false);
         toast.success('Login Successful');
         router.push("/");
-        setIsLoadingScreen(true);
+        setTimeout(function() {
+          setIsLoadingScreen(true);
+        }, 200);
+        
       })
       .catch(err => {
         if (err.response) {
@@ -79,7 +82,7 @@ const login = () => {
   return (
     <>
       {isLoadingScreen ?
-        <div id="canvas">
+        <div id="canvas" className={style.loaderContainer}>
           <Toaster />
           <ThreeDots
             height="80"
