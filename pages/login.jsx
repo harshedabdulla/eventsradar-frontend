@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
+import { TailSpin } from 'react-loader-spinner'
 import axios from 'axios';
 
 
@@ -25,6 +26,7 @@ const login = () => {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
 
 
   const handleChange = (e) => {
@@ -40,24 +42,26 @@ const login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     const data = {
       email: email,
       password: password
     }
 
-
+    setIsLoading(true);
     axios.post('https://api.events.cusat.me/user/login', JSON.stringify(data))
       .then(res => {
         console.log(res.data.data);
-        toast.success('Login Successful');
         localStorage.setItem('token', res.data.data);
         localStorage.setItem('user', JSON.stringify(data.email));
+        setIsLoading(false);
+        toast.success('Login Successful');
         router.push("/");
       }
       )
       .catch(err => {
         if (err.response) {
+          setIsLoading(false);
           toast.error(err.response.data.message)
         }
       }
@@ -68,8 +72,8 @@ const login = () => {
   useEffect(() => {
     toasts
       .filter((t) => t.visible)
-      .filter((_, i) => i >= 3) 
-      .forEach((t) => toast.dismiss(t.id)); 
+      .filter((_, i) => i >= 3)
+      .forEach((t) => toast.dismiss(t.id));
   }, [toasts]);
 
 
@@ -77,8 +81,11 @@ const login = () => {
 
   return (
     <>
+
       <div className={style.container} id="canvas">
-      <Toaster/>
+        <Toaster />
+
+
 
         <div className={style.imageContainer}>
           <Image src={logo} alt="logo" width="300" className={style.logo} />
@@ -111,13 +118,25 @@ const login = () => {
             <input id="password" type="password" value={password} onChange={handleChange} required />
 
 
-            <button className={`${style.submitBtn} ${style.loginSubmitBtn}`} type="submit">Login</button>
+            <button className={`${style.submitBtn} ${style.loginSubmitBtn}`} type="submit">
+              {isLoading ?
+                  <TailSpin
+                    height="15"
+                    width="36"
+                    color="white"
+                    ariaLabel="tail-spin-loading"
+                    radius="1"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                  />: `Login`}
+            </button>
           </form>
 
         </div>
       </div>
     </>
-  
+
 
   )
 }

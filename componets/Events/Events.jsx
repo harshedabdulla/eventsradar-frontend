@@ -1,26 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
+
 import EventCard from '../EventCard/EventCard';
-
-import EventContext from '../../context/events/EventContext';
-
 import style from "./Events.module.scss";
 
+const Events = ({Events}) => {
 
-
-const Events = (props) => {
-
-  const eventContext = useContext(EventContext);
-  const { events } = eventContext;
-
-
+  console.log(Events)
 
   const [activeMenu, setActiveMenu] = useState("All")
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
 
   useEffect(() => {
-
+  
     setAnimateCard([{ y: 100, opacity: 0 }]);
     setTimeout(() => {
       setAnimateCard([{ y: 0, opacity: 1 }]);
@@ -61,7 +54,7 @@ const Events = (props) => {
           transition={{ duration: 0.5, delayChildren: 0.5 }}
           className={style.event__card}
         >
-          {events.map((event, index) => (
+          {Events?.map((event, index) => (
             <EventCard key={index}
               organizer_name={event.organizer_name}
               title={event.title}

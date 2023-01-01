@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import toast, { Toaster, useToasterStore } from 'react-hot-toast';
+import { TailSpin } from 'react-loader-spinner'
 import axios from 'axios';
 
 import style from "../styles/Login.module.scss"
@@ -19,6 +20,7 @@ const signup = () => {
   const { toasts } = useToasterStore();
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({
     firstName: '',
     lastName: '',
@@ -43,20 +45,22 @@ const signup = () => {
       email: userData.email,
       password: userData.password
     }
-
+    setIsLoading(true);
     axios.post('https://api.events.cusat.me/user/signup', JSON.stringify(data))
       .then(res => {
-        console.log(res.data.data);
+        // console.log(res.data.data);
         toast.success('Signup Successful');
         localStorage.setItem('token', res.data.data);
         localStorage.setItem('user', JSON.stringify(data.email));
+        setIsLoading(false);
         router.push("/");
       }
       )
       .catch(err => {
         if (err.response) {
-          console.log(err.response.data);
-          if(err.response.data.message === "User already exists")
+          setIsLoading(false);
+          // console.log(err.response.data);
+          if (err.response.data.message === "User already exists")
             toast.error("User already exists")
           else
             toast.error(err.response.data.message)
@@ -67,16 +71,16 @@ const signup = () => {
 
   useEffect(() => {
     toasts
-      .filter((t) => t.visible) 
-      .filter((_, i) => i >= 3) 
-      .forEach((t) => toast.dismiss(t.id)); 
+      .filter((t) => t.visible)
+      .filter((_, i) => i >= 3)
+      .forEach((t) => toast.dismiss(t.id));
   }, [toasts]);
 
 
 
   return (
     <div className={style.container} id="canvas">
-      <Toaster   />
+      <Toaster />
       <div className={style.imageContainer}>
         <Image src={logo} alt="logo" width="300" className={style.logo} />
         <p>Already have an account?<Link href="/login"> Log in</Link></p>
@@ -118,7 +122,19 @@ const signup = () => {
             <input id="checkbox" type="checkbox" required />
             <label htmlFor="checkbox">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
           </div>
-          <button className={style.submitBtn} type="submit" >Sing Up</button>
+          <button className={style.submitBtn} type="submit" >
+            {isLoading ?
+              <TailSpin
+                height="15"
+                width="50"
+                color="white"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              /> : `Sing Up`}
+          </button>
         </form>
       </div>
     </div>

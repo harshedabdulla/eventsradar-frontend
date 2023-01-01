@@ -44,6 +44,10 @@
   p {
     font-size: small;
     color: white;
+    width: 280px;
+    @media screen and (max-width : 330px) {
+      width: 235px;
+    }
   }
 
   span {

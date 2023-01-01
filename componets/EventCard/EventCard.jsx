@@ -38,7 +38,7 @@ const EventCard = (props) => {
         <Image src={eventImg ? eventImg : placeholder} className={style.header_img} alt="rover" />
       </div>
       <div className={style.card_body}>
-        <p>{description}</p>
+        <p>{`An exploration into An exploration into the truck's polarising design`}</p>
         <span className={style.time}>{date}</span>
         <button><Link href={application_link}><p> Register Now</p></Link></button>
       </div>

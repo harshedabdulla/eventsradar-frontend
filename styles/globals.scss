@@ -6,3 +6,12 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.rings_loading {
+  background-color: aliceblue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  z-index: 999;
+}

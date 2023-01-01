@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { fetchEvents } from '../api/FetchEvents';
 
 import Radar from "../componets/Radar/Radar";
 import NavBar from "../componets/Navbar/NavBar";
@@ -10,6 +11,7 @@ import EventContext from '../context/events/EventContext';
 
 import style from "../styles/Home.module.scss";
 import Events from '../componets/Events/Events';
+
 
 
 const scaleVariants = {
@@ -23,39 +25,25 @@ const scaleVariants = {
   }
 }
 
-export async function getServerSideProps() {
-  try {
-    const HOST = "https://api.events.cusat.me"
-    const url = `${HOST}/user/AllEvents`
-    const { data } = await axios.get(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        }
-        })
-    return {
-      props: {
-        data,
-      },
-    };
-  } catch (error) {
-    return {
-      props: {
-        error: error.message,
-      },
-    };
+
+
+export const getServerSideProps = async (context) => {
+  const events = await fetchEvents();
+  return {
+    props: {
+      events
+    }
   }
 }
+
 
 
 const Home = (props) => {
 
   const router = useRouter();
 
-  // console.log(props.data.data.Events)
-
   const eventContext = useContext(EventContext);
   const {getEvents } = eventContext;
-
 
   const [zoomin, setZoomIn] = useState(false)
   const [zoomout, setZoomOut] = useState(false)
@@ -71,14 +59,13 @@ const Home = (props) => {
 
   useEffect(() => {
 
-      
+    getEvents(props.events.data.Events);
+
     const token = localStorage.getItem('token');
-    // console.log(token);
     if (!token) {
       router.push('/login');
     }
-
-    getEvents(props.data.data.Events);
+    
 
     const radar = document.querySelector('#radar');
     const navbarContainer = document.querySelector('#navbarContainer');
@@ -127,7 +114,7 @@ const Home = (props) => {
       </div>
     
       <div id="events" className={style.EventsContainer}>
-        <Events />
+        <Events Events={props.events.data.Events}/>
       </div>
 
 
