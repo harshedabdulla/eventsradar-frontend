@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import toast, { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { fetchEvents } from '../api/FetchEvents';
 
@@ -97,7 +96,6 @@ const Home = (props) => {
 
   return (
     <>
-    <Toaster />
       <motion.div variants={scaleVariants}
         whileInView={scaleVariants.whileInView} >
         <div id="radar" className={style.RadarContainer}>

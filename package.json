@@ -24,6 +24,7 @@
     "react-icon": "^1.0.0",
     "react-icons": "^4.7.1",
     "react-loader-spinner": "^5.3.4",
+    "react-loading-screen": "^0.0.17",
     "react-router-dom": "^6.6.1",
     "sass": "^1.57.0",
     "sketch-js": "^1.1.3"
