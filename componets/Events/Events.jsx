@@ -4,14 +4,30 @@ import { motion } from 'framer-motion';
 import EventCard from '../EventCard/EventCard';
 import style from "./Events.module.scss";
 
-const Events = ({Events}) => {
+const Events = ({ Events }) => {
 
   const [activeMenu, setActiveMenu] = useState("All")
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+  const [filterEvents, setFilterEvents] = useState(Events);
 
+  const getEventsTag = (Events) => {
+
+    const currDate = new Date();
+
+    Events?.map((event) => {
+      const eventDate = new Date(event.event_date);
+      if(eventDate >= currDate){
+        event.tag = 'Upcoming';
+      }else{
+        event.tag = 'Past';
+      }
+    })
+  }
 
   useEffect(() => {
-  
+
+    getEventsTag(Events);
+
     setAnimateCard([{ y: 100, opacity: 0 }]);
     setTimeout(() => {
       setAnimateCard([{ y: 0, opacity: 1 }]);
@@ -22,6 +38,12 @@ const Events = ({Events}) => {
   const handlesetActiveMenu = (item) => {
     setActiveMenu(item);
     setAnimateCard([{ y: 100, opacity: 0 }]);
+
+    if (item === 'All') {
+      setFilterEvents(Events);
+    } else {
+      setFilterEvents(Events.filter((event) => event.tag.includes(item)));
+    }
 
     setTimeout(() => {
       setAnimateCard([{ y: 0, opacity: 1 }]);
@@ -52,7 +74,7 @@ const Events = ({Events}) => {
           transition={{ duration: 0.5, delayChildren: 0.5 }}
           className={style.event__card}
         >
-          {Events?.map((event, index) => (
+          {filterEvents?.map((event, index) => (
             <EventCard key={index}
               organizer_name={event.organizer_name}
               title={event.title}
