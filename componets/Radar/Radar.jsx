@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import NextImage from 'next/image';
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
+import React, {useState, useEffect, useRef} from 'react';
+import { isMobile } from 'react-device-detect';
 
 import style from "./Radar.module.scss";
 
@@ -18,8 +16,11 @@ class MapView {
   mapContext;
   maxCircles = 10;
   zoom_factor = 0.04;
-  constructor(map) {
+  getEvent = () => 0;
+
+  constructor(map, getEvent) {
     this.map = map;
+    this.getEvent = getEvent;
     this.mapContext = map.getContext("2d");
     this.pos = { x: this.map.width / 2, y: this.map.height / 2 };
 
@@ -56,39 +57,37 @@ class MapView {
 
   drawCanvas = (frame) => {
     this.mapContext.clearRect(0, 0, this.map.width, this.map.height);
-    this.mapContext.fillStyle = "rgba(7,59,13,1)";
-    // this.mapContext.fillRect(0, 0, this.map.width, this.map.height); // bg color
     this.radarScan(frame / 2000);
 
-    const step = canvas.width / this.maxCircles / 2;
-    const radius = Array(this.maxCircles * 8).fill(1).map((v, i) => (step * (i + this.scale)) % (canvas.width * 4))
+    const step = this.map.width / this.maxCircles / 2;
+    const days = Array(this.maxCircles * 8)
+        .fill(1)
+        .map((v, i) => (step * (i + this.scale)));
+
+    console.log(days);
+
+    const radius = days.map((day) => day % (this.map.width * 4));
+    const events = days.map((day) => [day  % (this.map.width * 4), this.getEvent(day)]);
+
     radius.forEach(this.drawCircle);
-    // this.set_logo()
+    events.forEach(this.drawEvent);
 
     requestAnimationFrame(this.drawCanvas);
   };
-
-  set_logo() {
-    const logo = new Image();
-    logo.src = eventRadarLogo;
-    logo.width = 150;
-    logo.height = 150;
-    this.mapContext.drawImage(logo, this.pos.x - logo.width / 2, this.pos.y - logo.height / 2, logo.width, logo.height);
-  }
-
-  set_events_logo(x, y, radius) {
-    const logo = new Image();
-    logo.src = tedLogo;
-    logo.width = 50;
-    logo.height = 50;
-    this.mapContext.drawImage(logo, x - radius, y - radius, logo.width, logo.height);
-  }
 
   drawCircle = (radius) => {
     this.mapContext.strokeStyle = "#37AE47";
     this.mapContext.beginPath();
     this.mapContext.arc(this.pos.x, this.pos.y, radius, 0, 2 * Math.PI);
     this.mapContext.stroke();
+  }
+
+  drawEvent = ([r, event]) =>
+  {
+      const x = r*Math.cos(event) + this.pos.x;
+      const y = r*Math.sin(event) + this.pos.y;
+
+      this.mapContext.fillText(event, x, y, 30);
   }
 
   radarScan(angle) {
@@ -147,40 +146,30 @@ class MapView {
       this.pos = { x: Math.min(x, this.map.width), y: Math.min(y, this.map.height) };
     }
   };
-};
+}
 
 const Radar = (props) => {
 
-  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+  const canvas = useRef();
+  const [view, setView] = useState(null);
+
+  function getEvent(day){
+    return day;
+  }
 
   useEffect(() => {
+    if(!canvas.current)
+      return;
 
-    setAnimateCard([{ y: 100, opacity: 0 }]);
-    setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
-    }, 500);
+    canvas.current.width = window.innerWidth;
+    canvas.current.height = window.innerHeight;
 
-
-    const canvas = document.getElementById("canvas");
-    function setSize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    addEventListener("resize", setSize);
-    addEventListener("load", setSize);
-    setSize();
-
-    const map = new MapView(canvas);
-
-  }, [])
-
-
-
+    setView(new MapView(canvas.current, getEvent));
+  }, [canvas]);
 
   return (
     <div>
-      <canvas id="canvas" className={style.canvas}></canvas>
+      <canvas ref={canvas}></canvas>
     </div>
   )
 }

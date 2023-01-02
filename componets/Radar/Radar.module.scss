@@ -43,8 +43,8 @@
 }
 
 .spin0 {
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
 }
 .spin1 {
   width: 175px;
@@ -121,7 +121,7 @@
         opacity: 1;
     }
   }
-  
+
 
   &:hover {
     transform: scale(1.2);
@@ -189,7 +189,7 @@
   display: block;
   overflow: visible;
   position: absolute ;
-  
+
   &.active {
     rect {
       width: 80px;
@@ -215,7 +215,7 @@
 
 .circle4 {
   opacity: 0.8;
-  animation-delay: .5s;
+  animation: expandCTwo 3s infinite;
   animation: expandCTwo 3s infinite;
   animation-delay: 0.6s;
   transition: .4s;
